@@ -1,0 +1,9 @@
+:root {
+    --font-family: "Karla", sans-serif;
+    --second-family: "Helvetica", sans-serif;
+    --third-family: "Inter", sans-serif;
+  }
+* {
+    margin: 0;
+    padding: 0;
+}
