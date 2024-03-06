@@ -5,6 +5,7 @@ import GamePage from './components/GamePage.vue'
 const routes = [
     { path: '/', name: 'main', component: SiteMain},
     { path: '/game/:id', name: 'game', component: GamePage},
+    {path: '/game/:id/:category', name: 'category', component: GamePage}
 ]
 
 const history = createWebHistory();

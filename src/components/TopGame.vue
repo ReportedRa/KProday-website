@@ -1,11 +1,17 @@
 <script>
+import { useStore } from '../folders/Store';
+
 export default {
     data() {
         return {
-            gameImage: "/src/assets/game-products/cs2back.svg",
-            gameName: "Counter Strike 2",
-            gameLogo: "/src/assets/game-products/cs2logo.svg",
+            gameImage: ["/src/assets/game-products/cs2back.svg", "/src/assets/game-products/dota2back.svg", "/src/assets/game-products/pubgback.svg", "/src/assets/game-products/brawlback.svg"],
+            gameName: ["Counter Strike 2", "Dota 2", "PUBG", "Brawl Stars"],
+            gameLogo: ["/src/assets/game-products/cs2logo.svg", "/src/assets/game-products/dota2logo.svg", "/src/assets/game-products/pubglogo.svg", "/src/assets/game-products/brawllogo.svg"]
         }
+    },
+    setup() {
+        let store = useStore()
+        return { store }
     }
 }
 </script>
@@ -21,15 +27,15 @@ export default {
     </div>
     <div class="cont-game-img">
         <div class="game-img">
-            <img :src="gameImage" alt="">
+            <img :src="gameImage[store.gameOptions]" alt="">
         </div>
     </div>
     <div class="cont-game-info">
         <div class="game-logo">
-            <img class="game-logo-img" :src="gameLogo" alt="">
+            <img class="game-logo-img" :src="gameLogo[store.gameOptions]" alt="">
         </div>
         <div class="game-name">
-            <span>{{ gameName }}</span>
+            <span>{{ gameName[store.gameOptions] }}</span>
         </div>
     </div>
 </template>

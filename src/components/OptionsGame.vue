@@ -1,18 +1,20 @@
 <script>
+import { useStore } from '../folders/Store'
 export default {
-    data() {
-        return {
-            gameCategory: ["Аккаунты", "Скины", "Буст", "Обучение", "Прочее"],
-        }
-    }
+    setup() {
+        const store = useStore();
+        return { store }
+    },
 }
 </script>
 
 <template>
     <div class="cont-game-options">
-        <div class="cont-game-option" v-for="option in gameCategory">
+        <div class="cont-game-option" v-for="option in store.productCards[store.gameOptions].productCategory">
             <div class="game-option">
-                <a href="">{{ option }}</a>
+                <router-link :id="option.id" :to="{ name: 'category', params: { category: option.category } }">{{
+                    option.name
+                }}</router-link>
             </div>
         </div>
     </div>
@@ -42,12 +44,16 @@ export default {
     text-decoration: none;
     padding: 10px 40px;
     border-radius: 15px;
-
 }
 
 .game-option a:hover {
     background-color: #181824;
 }
+
+.game-a-clicked {
+    background-color: #181824;
+}
+
 
 @media (max-width: 1628px) {
     .cont-game-options {

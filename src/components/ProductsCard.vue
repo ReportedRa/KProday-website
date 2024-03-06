@@ -2,11 +2,6 @@
 import { useStore } from '../folders/Store'
 
 export default {
-    data() {
-        return {
-
-        }
-    },
     setup() {
         const store = useStore();
         return { store }
@@ -28,7 +23,7 @@ export default {
                         }}</router-link>
                 </div>
                 <div class="product-categories">
-                    <a href="#" v-for="category in card.productCategory">{{ category }}</a>
+                    <a href="#" v-for="category in card.productCategory">{{ category.name }}</a>
                 </div>
             </div>
         </div>
