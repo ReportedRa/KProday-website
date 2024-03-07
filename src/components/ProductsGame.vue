@@ -1,22 +1,41 @@
 <script>
+import { useStore } from '../folders/Store'
 export default {
+    setup() {
+        let store = useStore()
+        return { store }
+    },
     data() {
         return {
-            gameProduct: [
-                { productCategory: "account", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1050 ₽", productDescription: "Аккаунт кс 2 с праймом" },
-                { productCategory: "account", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1250 ₽", productDescription: "Аккаунт кс 2 без прайма" },
-                { productCategory: "account", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "950 ₽", productDescription: "Аккаунт кс 2 без прайма со скинами" },
-                { productCategory: "account", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1750 ₽", productDescription: "Аккаунт кс 2 с праймом и скинами" },
-                { productCategory: "account", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "12050 ₽", productDescription: "Аккаунт кс 2 с праймом и ножом" },
-            ],
+            accounts: [
+                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1050 ₽", productDescription: "Аккаунт кс 2 с праймом" },
+                { productGame: "dota-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "200 ₽", productDescription: "Дота 2 с баном за овер" },
+                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "950 ₽", productDescription: "Аккаунт кс 2 без прайма со скинами" },
+                { productGame: "dota-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1750 ₽", productDescription: "Аккаунт с 1745 ммр" },
+                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "12050 ₽", productDescription: "Аккаунт кс 2 с праймом и ножом" },],
+
+            skins: [
+                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "500 ₽", productDescription: "АК-47 Сланец" },
+                { productGame: "dota-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "5000 ₽", productDescription: "Аркана на пуджа" },]
         }
     },
+    computed: {
+        myArray() {
+            return this[this.store.option]
+        },
+        gameFilter() {
+            let o = this.store.gameID
+            return this.myArray.filter(product => {
+                return product.productGame.toLowerCase().includes(o.toLowerCase())
+            })
+        },
+    }
 }
 </script>
 
 <template>
     <div class="cont-game-products">
-        <div class="product" v-for="product in gameProduct">
+        <div class="product" v-for="product in gameFilter">
             <div class="product-img">
                 <img :src="product.productImg" alt="">
             </div>

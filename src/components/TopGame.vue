@@ -27,15 +27,15 @@ export default {
     </div>
     <div class="cont-game-img">
         <div class="game-img">
-            <img :src="gameImage[store.gameOptions]" alt="">
+            <img :src="gameImage[store.gameIndex]" alt="">
         </div>
     </div>
     <div class="cont-game-info">
         <div class="game-logo">
-            <img class="game-logo-img" :src="gameLogo[store.gameOptions]" alt="">
+            <img class="game-logo-img" :src="gameLogo[store.gameIndex]" alt="">
         </div>
         <div class="game-name">
-            <span>{{ gameName[store.gameOptions] }}</span>
+            <span>{{ gameName[store.gameIndex] }}</span>
         </div>
     </div>
 </template>

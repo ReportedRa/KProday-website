@@ -10,11 +10,12 @@ export default {
 
 <template>
     <div class="cont-game-options">
-        <div class="cont-game-option" v-for="option in store.productCards[store.gameOptions].productCategory">
+        <div class="cont-game-option" v-for="option in store.productCards[store.gameIndex].productCategory">
             <div class="game-option">
-                <router-link :id="option.id" :to="{ name: 'category', params: { category: option.category } }">{{
-                    option.name
-                }}</router-link>
+                <router-link @click="store.gameGetCategory(option.category)"
+                    :to="{ name: 'category', params: { category: option.category } }">{{
+                        option.name
+                    }}</router-link>
             </div>
         </div>
     </div>
