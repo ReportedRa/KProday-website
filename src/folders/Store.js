@@ -4,7 +4,7 @@ export const useStore = defineStore('store', {
     state: () => ({
         gameID: "counter-strike-2", 
         search: "",
-        option: "",
+        option: "accounts",
         productCards: [
             { productImage: "/src/assets/products/cs2product.svg", productTitle: "Counter Strike 2", productCategory: [ {id: 0, name: "Аккаунты", category: "accounts"},{id: 1, name: "Скины", category: "skins"},{id: 2, name: "Буст", category: "boost"},{id: 3, name: "Обучение", category: "training"},{id: 4, name: "Прочее", category: "others"},], productID: "counter-strike-2"},
             { productImage: "/src/assets/products/dota2product.svg", productTitle: "Dota 2", productCategory: [ {id: 0, name: "Аккаунты", category: "accounts"},{id: 1, name: "Скины", category: "skins"},{id: 2, name: "Буст", category: "boost"},{id: 3, name: "Обучение", category: "training"},{id: 4, name: "Прочее", category: "others"},], productID: "dota-2"},
