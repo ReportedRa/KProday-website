@@ -1,11 +1,10 @@
-import Router from 'express'
-import {newGame, mainGames, pageGames, category, topGame} from '../controllers/mainController.js'
+const Router = require('express')
 const router = new Router()
 
-router.get('/main', mainGames)
-router.get('/game/:id', pageGames)
-router.get('/game/:id', category)
-router.get('/game/:id', topGame)
-router.post('/main', newGame)
+const mainController = require('../controllers/mainController')
 
-export default router 
+router.get('/main', mainController.getMainGames)
+router.post('/main', mainController.postNewGame)
+router.get('/game/:id', mainController.getCategory)
+
+module.exports = router;
