@@ -8,10 +8,18 @@ export default {
         const store = useStore();
         return { store }
     },
+    data() {
+        return {
+            categoryIds: []
+        }
+    },
     async mounted() {
         try {
             const res = await axios.get('http://localhost:5001/api/main').then((res) => {
                 this.store.cardProduct = res.data
+                this.categoryIds = this.store.cardProduct.map(obj => {
+                    return obj.category_id
+                })
             })
         } catch (e) {
             console.log(e)
@@ -35,7 +43,10 @@ export default {
                         }}</router-link>
                 </div>
                 <div class="product-categories">
-                    <a href="#" v-for="category in card.game_category">{{ category }}</a>
+                    <router-link v-for="category in card.game_category" @click="store.gameGetID(card.game_id)"
+                        :to="{ name: 'game', params: { id: card.game_id } }">{{
+                            category
+                        }}</router-link>
                 </div>
             </div>
         </div>

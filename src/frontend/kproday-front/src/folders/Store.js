@@ -6,7 +6,7 @@ export const useStore = defineStore('store', {
         gameID: "counter-strike-2", 
         search: "",
         cardProduct: [],
-        option: "accounts",
+        option: "",
         game: ["counter-strike-2", "dota-2", "pubg", "brawl-stars"],
         
     }),
@@ -41,6 +41,9 @@ export const useStore = defineStore('store', {
         gameGetCategory(option) {
             this.option = option
         },
+        nullCategory() {
+            this.option = null
+        }
     }
 })
 

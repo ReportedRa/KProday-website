@@ -15,7 +15,7 @@ export default {
             <img src="../assets/arrowBack.svg" alt="">
         </div>
         <div class="top-game-a">
-            <router-link to="/">На главную</router-link>
+            <router-link @click="store.nullCategory" to="/">На главную</router-link>
         </div>
     </div>
     <div class="cont-game-img" v-if="store.gameIndex != -1">

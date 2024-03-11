@@ -1,56 +1,72 @@
 <script>
 import { useStore } from '../folders/Store'
+import axios from 'axios'
+
 export default {
+    data() {
+        return {
+            productArray: [],
+            category: this.store.option
+        }
+    },
+    methods: {
+        async updateCategory() {
+            if (this.store.option) {
+                try {
+                    const id = this.$route.params.id;
+                    const category = this.store.option;
+                    const res = await axios.get(`http://localhost:5001/api/game/${id}/${category}`).then((res) => {
+                        this.productArray = res.data
+                    })
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            else {
+                try {
+                    const id = this.$route.params.id;
+                    const res = await axios.get(`http://localhost:5001/api/products/${id}`).then((res) => {
+                        this.productArray = res.data
+                    })
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        },
+    },
+    mounted() {
+        this.updateCategory()
+    },
     setup() {
         let store = useStore()
         return { store }
     },
-    data() {
-        return {
-            accounts: [
-                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1050 ₽", productDescription: "Аккаунт кс 2 с праймом" },
-                { productGame: "dota-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "200 ₽", productDescription: "Дота 2 с баном за овер" },
-                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "950 ₽", productDescription: "Аккаунт кс 2 без прайма со скинами" },
-                { productGame: "dota-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "1750 ₽", productDescription: "Аккаунт с 1745 ммр" },
-                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "12050 ₽", productDescription: "Аккаунт кс 2 с праймом и ножом" },],
-
-            skins: [
-                { productGame: "counter-strike-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "500 ₽", productDescription: "АК-47 Сланец" },
-                { productGame: "dota-2", productImg: "/src/assets/game-products/cs2products/cs2account1.svg", productCost: "5000 ₽", productDescription: "Аркана на пуджа" },]
-        }
-    },
-    computed: {
-        myArray() {
-            return this[this.store.option]
-        },
-        gameFilter() {
-            let o = this.store.gameID
-            try {
-                return this.myArray.filter(product => {
-                    return product.productGame.toLowerCase().includes(o.toLowerCase())
-                })
-            } catch (e) {
-                console.log(e)
+    watch: {
+        'store.option': {
+            handler() {
+                this.updateCategory()
             }
-
-        },
+        }
     }
 }
 </script>
 
 <template>
-    <div class="cont-game-products">
-        <div class="product" v-for="product in gameFilter">
+    <div class="cont-game-products" v-if="this.productArray.length">
+        <div class="product" v-for="product in this.productArray">
             <div class="product-img">
-                <img :src="product.productImg" alt="">
+                <img :src="product.product_img" alt="">
             </div>
             <div class="product-cost">
-                <span>{{ product.productCost }}</span>
+                <span>{{ product.product_cost }} ₽</span>
             </div>
             <div class="product-description">
-                <a href="#">{{ product.productDescription }}</a>
+                <a href="#">{{ product.product_description }}</a>
             </div>
         </div>
+    </div>
+    <div v-else class="null">
+        <p>Ничего не найдено</p>
     </div>
 </template>
 
@@ -67,6 +83,16 @@ export default {
     flex-direction: column;
     width: 25%;
 
+}
+
+.null {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
 }
 
 .product-img img {

@@ -31,7 +31,7 @@ export default {
     <div class="cont-game-options" v-if="gameCategories.length">
         <div class="cont-game-option" v-for="(category, index) in gameCategories">
             <div class="game-option">
-                <router-link @click="store.gameGetCategory(categoryIds[index])"
+                <router-link :id=categoryIds[index] @click="store.gameGetCategory(categoryIds[index])"
                     :to="{ name: 'category', params: { category: categoryIds[index] } }">{{
                         category
                     }}</router-link>
