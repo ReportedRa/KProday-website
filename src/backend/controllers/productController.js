@@ -1,5 +1,4 @@
 const {Product} = require('../models/productModel.js')
-const {Op} = require('sequelize')
 
 class productController {
     async postNewProduct(req, res) {
