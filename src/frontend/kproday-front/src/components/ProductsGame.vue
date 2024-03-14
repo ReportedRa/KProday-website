@@ -57,8 +57,13 @@ export default {
             <div class="product-img">
                 <img :src="product.product_img" alt="">
             </div>
-            <div class="product-cost">
-                <span>{{ product.product_cost }} ₽</span>
+            <div class="cont-cost-cart">
+                <div class="product-cost">
+                    <span>{{ product.product_cost }} ₽</span>
+                </div>
+                <div class="product-cart">
+                    <a href="#"><img class="cart-img" src="../assets/game-products/addtocart/addToCart.svg" alt=""></a>
+                </div>
             </div>
             <div class="product-description">
                 <a href="#">{{ product.product_description }}</a>
@@ -95,12 +100,24 @@ export default {
     font-size: 30px;
 }
 
+.cont-cost-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-img {
+    width: 46px;
+    height: 41px;
+}
+
 .product-img img {
     width: 97%;
 }
 
 .product-cost {
     padding-top: 5px;
+    padding-left: 4px;
 }
 
 .product-cost span {
@@ -112,13 +129,16 @@ export default {
     padding-left: 5px;
 }
 
+.product-description {
+    padding-left: 8px;
+}
+
 .product-description a {
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 22px;
     text-align: center;
     color: #fff;
-    padding-left: 7px;
     text-decoration: none;
 }
 

@@ -1,9 +1,23 @@
 <script>
 import { useStore } from '../folders/Store';
+import { onMounted } from 'vue';
 
 export default {
     setup() {
         let store = useStore()
+        onMounted(() => {
+            const storageValue = localStorage.getItem("gameID")
+            if (storageValue) {
+                store.gameID = storageValue
+            }
+            else {
+                const query = this.$route.params.id;
+                if (query) {
+                    store.gameID = query
+                    localStorage.setItem("gameID", query)
+                }
+            }
+        })
         return { store }
     },
 }
@@ -18,18 +32,21 @@ export default {
             <router-link @click="store.nullCategory" to="/">На главную</router-link>
         </div>
     </div>
-    <div class="cont-game-img" v-if="store.gameIndex != -1">
+    <div class="cont-game-img" v-if="store.gameIndex != -1 && store.gameID != null">
         <div class="game-img">
             <img :src="store.cardProduct[store.gameIndex].game_background" alt="">
         </div>
     </div>
-    <div class="cont-game-info" v-if="store.gameIndex != -1">
+    <div class="cont-game-info" v-if="store.gameIndex != -1 && store.gameID != null">
         <div class="game-logo">
             <img class="game-logo-img" :src="store.cardProduct[store.gameIndex].game_logo" alt="">
         </div>
-        <div class="game-name" v-if="store.gameIndex != -1">
+        <div class="game-name" v-if="store.gameIndex != -1 && store.gameID != null">
             <span>{{ store.cardProduct[store.gameIndex].game_title }}</span>
         </div>
+    </div>
+    <div class="null" v-else>
+        <p>Loading...</p>
     </div>
 </template>
 

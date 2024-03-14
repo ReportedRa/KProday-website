@@ -3,12 +3,11 @@ import axios from 'axios'
 
 export const useStore = defineStore('store', {
     state: () => ({
-        gameID: "counter-strike-2", 
+        gameID: "", 
         search: "",
         cardProduct: [],
         option: "",
         game: ["counter-strike-2", "dota-2", "pubg", "brawl-stars"],
-        
     }),
     getters: {
         searchFilter() {
@@ -22,7 +21,6 @@ export const useStore = defineStore('store', {
                 try {
                     const res = await axios.get('http://localhost:5001/api/main').then((res) => {
                         this.cardProduct = res.data
-                        console.log(this.cardProduct)
                     })
                 } catch (e) {
                     console.log(e)
@@ -33,10 +31,12 @@ export const useStore = defineStore('store', {
             let index = this.cardProduct.findIndex(obj => obj.game_id === this.gameID);
             return index; 
         },
+        
     },
     actions: {
         gameGetID(ID) {
             this.gameID = ID
+            localStorage.setItem("gameID", this.gameID)
         },
         gameGetCategory(option) {
             this.option = option

@@ -1,10 +1,14 @@
 <script>
 import ProductsCard from './ProductsCard.vue'
 import AdvertisementComponent from './AdvertisementComponent.vue'
+import SiteHeader from './SiteHeader.vue'
+import SiteFooter from './SiteFooter.vue'
 export default {
     components: {
         ProductsCard,
         AdvertisementComponent,
+        SiteHeader,
+        SiteFooter
     },
     methods: {
         gameGetIDChild(ID) {
@@ -16,6 +20,7 @@ export default {
 </script>
 
 <template>
+    <site-header></site-header>
     <main>
         <div class="cont-main">
             <advertisement-component></advertisement-component>
@@ -25,6 +30,7 @@ export default {
             <products-card @getID="gameGetIDChild"></products-card>
         </div>
     </main>
+    <site-footer></site-footer>
 </template>
 
 <style>

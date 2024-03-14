@@ -42,6 +42,14 @@ export default {
                 <div class="user-img">
                     <a href="#"><img src="../assets/userprofile.svg" alt=""></a>
                 </div>
+                <div class="dropdown">
+                    <button class="dropbtn"><img src="../assets/dropdown_menu.svg" alt=""></button>
+                    <div class="dropdown-content">
+                        <a href="#">Ник</a>
+                        <a href="#">Профиль</a>
+                        <a href="#">Выйти</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -55,6 +63,46 @@ export default {
     background-color: #131217;
     padding: 25px 94px;
     border-bottom: 1px solid #363637;
+}
+
+.dropbtn {
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color: #131217;
+    width: 25px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .name {

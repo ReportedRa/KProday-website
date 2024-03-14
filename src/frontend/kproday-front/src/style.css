@@ -1,9 +1,18 @@
 :root {
-    --font-family: "Karla", sans-serif;
-    --second-family: "Helvetica", sans-serif;
-    --third-family: "Inter", sans-serif;
-  }
+  --font-family: "Karla", sans-serif;
+  --second-family: "Helvetica", sans-serif;
+  --third-family: "Verdana", sans-serif;
+  --font3: "Inter", sans-serif;
+}
 * {
     margin: 0;
     padding: 0;
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url('./assets/fonts/Helvetica-Light.woff2') format('woff2');
+  font-weight: 400;
+  font-style: light;
+  font-display: swap;
 }

@@ -3,6 +3,7 @@ import SiteHeader from './components/SiteHeader.vue'
 import SiteMain from './components/SiteMain.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import GamePage from './components/GamePage.vue'
+import UserProfile from './components/UserProfile.vue'
 
 export default {
   components: {
@@ -10,14 +11,14 @@ export default {
     SiteMain,
     SiteFooter,
     GamePage,
+    UserProfile,
   },
 }
 </script>
 
 <template>
-  <site-header></site-header>
-  <router-view></router-view>
-  <site-footer></site-footer>
+  <vue-router></vue-router>
+  <!-- <user-profile></user-profile> -->
 </template>
 
 <style></style>
