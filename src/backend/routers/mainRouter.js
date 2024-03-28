@@ -13,9 +13,11 @@ router.get('/products/:id', productController.getProducts)
 router.post('/game', productController.postNewProduct)
 router.post('/user', userController.createNewUser)
 router.get('/users', userController.getAllUsers)
-router.get('/account', userController.getOneUser)
-router.get('/login', userController.getUserAndCheckPassword)
-router.put('/account/update-password', userController.updatePassword)
+router.post('/account', userController.getOneUser)
+router.post('/login', userController.getUserAndCheckPassword)
+router.post('/user/update-password', userController.updatePassword)
+router.post('/user/cart', productController.getCartProducts)
+router.post('/user/cart/add', productController.getToCart)
 
 
 module.exports = router;

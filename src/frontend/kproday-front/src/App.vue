@@ -4,6 +4,8 @@ import SiteMain from './components/SiteMain.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import GamePage from './components/GamePage.vue'
 import UserProfile from './components/UserProfile.vue'
+import LoginPage from './components/LoginPage.vue'
+import CartVidget from './components/CartVidget.vue'
 
 export default {
   components: {
@@ -12,13 +14,15 @@ export default {
     SiteFooter,
     GamePage,
     UserProfile,
+    LoginPage,
+    CartVidget,
   },
 }
 </script>
 
 <template>
-  <vue-router></vue-router>
-  <!-- <user-profile></user-profile> -->
+  <site-main></site-main>
+  <!-- <router-view></router-view> -->
 </template>
 
 <style></style>

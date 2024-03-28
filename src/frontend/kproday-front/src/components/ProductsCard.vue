@@ -32,7 +32,7 @@ export default {
 <template>
     <div class="cont-products">
         <div class="cont-for-products">
-            <div class="product" v-for="card in store.searchFilter">
+            <div class="product" v-if="store.searchFilter.length != 0" v-for="card in store.searchFilter">
                 <div class="product-img">
                     <img :src="card.game_image" alt="" class="">
                 </div>
@@ -49,6 +49,9 @@ export default {
                         }}</router-link>
                 </div>
             </div>
+            <div class="null" v-else >
+            <p>Ничего не найдено</p>
+        </div>
         </div>
     </div>
 </template>

@@ -4,10 +4,18 @@ import axios from 'axios'
 export const useStore = defineStore('store', {
     state: () => ({
         gameID: "", 
+        nickname: "",
+        email: "",
+        balance: "",
         search: "",
         cardProduct: [],
         option: "",
         game: ["counter-strike-2", "dota-2", "pubg", "brawl-stars"],
+        isType: true,
+        isShow: false,
+        isLoggedIn: "", 
+        user_id: null,
+        isShowCart: false
     }),
     getters: {
         searchFilter() {
@@ -31,7 +39,24 @@ export const useStore = defineStore('store', {
             let index = this.cardProduct.findIndex(obj => obj.game_id === this.gameID);
             return index; 
         },
-        
+        ifNull(){
+            if(this.isLoggedIn == "") {
+                this.isLoggedIn = localStorage.getItem("isLogged")
+                this.nickname = localStorage.getItem("nickname")
+                this.email = localStorage.getItem("email")
+                this.balance = localStorage.getItem("balance")
+                this.user_id = localStorage.getItem("user_id")
+                return (this.isLoggedIn, this.nickname)
+            }
+            else if(localStorage.getItem("isLogged") == null) {
+                this.isLoggedIn = 'false'
+                return this.isLoggedIn
+            }
+            if(this.user_id == null) {
+                this.user_id = localStorage.getItem("user_id")
+                return this.user_id
+            }
+        }
     },
     actions: {
         gameGetID(ID) {

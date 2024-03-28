@@ -3,23 +3,24 @@ import ProductsCard from './ProductsCard.vue'
 import AdvertisementComponent from './AdvertisementComponent.vue'
 import SiteHeader from './SiteHeader.vue'
 import SiteFooter from './SiteFooter.vue'
+import LoginPage from './LoginPage.vue'
+import CartVidget from './CartVidget.vue'
+
 export default {
     components: {
         ProductsCard,
         AdvertisementComponent,
         SiteHeader,
-        SiteFooter
+        SiteFooter,
+        LoginPage,
+        CartVidget
     },
-    methods: {
-        gameGetIDChild(ID) {
-            console.log(ID)
-            this.$emit('getIDBy', ID)
-        },
-    }
 }
 </script>
 
 <template>
+    <cart-vidget></cart-vidget>
+    <login-page></login-page>
     <site-header></site-header>
     <main>
         <div class="cont-main">
@@ -27,7 +28,7 @@ export default {
             <div class="cont-games">
                 <span>Игры и приложения</span>
             </div>
-            <products-card @getID="gameGetIDChild"></products-card>
+            <products-card></products-card>
         </div>
     </main>
     <site-footer></site-footer>

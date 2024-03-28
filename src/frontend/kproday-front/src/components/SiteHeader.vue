@@ -1,13 +1,30 @@
 <script>
 import { useStore } from '../folders/Store'
 export default {
-    data() {
-        return {
-        }
-    },
     setup() {
         const store = useStore();
         return { store }
+    },
+    data() {
+        return {
+            isLoggedIn: this.store.isLoggedIn,
+            isShow: this.store.isShow,
+        }
+    },
+    methods: {
+        openModal() {
+            this.store.isShow = !this.store.isShow
+        },
+        openCart(){
+            this.store.isShowCart = !this.store.isShowCart
+        },
+        logOut() {
+            this.store.isLoggedIn = !this.store.isLoggedIn
+            localStorage.removeItem("isLogged")
+            localStorage.removeItem("nickname")
+            localStorage.removeItem("email")
+            localStorage.removeItem("balance")
+        }
     }
 }
 
@@ -37,17 +54,23 @@ export default {
             </div>
             <div class="cont-user">
                 <div class="user-img">
-                    <a href="#"><img src="../assets/shoppingbag.svg" alt=""></a>
+                    <a href="#" @click="openCart()"><img src="../assets/shoppingbag.svg" alt=""></a>
                 </div>
                 <div class="user-img">
                     <a href="#"><img src="../assets/userprofile.svg" alt=""></a>
                 </div>
-                <div class="dropdown">
+                <div class="dropdown" v-if="this.store.isLoggedIn == 'true'">
                     <button class="dropbtn"><img src="../assets/dropdown_menu.svg" alt=""></button>
                     <div class="dropdown-content">
-                        <a href="#">Ник</a>
-                        <a href="#">Профиль</a>
-                        <a href="#">Выйти</a>
+                        <p class="nickname">{{this.store.nickname}}</p>
+                        <a href="http://localhost:5173/user/profile">Профиль</a>
+                        <a @click="logOut()" href="#">Выйти</a>
+                    </div>
+                </div>
+                <div class="dropdown" v-if="this.store.isLoggedIn == 'false' || this.store.isLoggedIn == ''">
+                    <button class="dropbtn"><img src="../assets/dropdown_menu.svg" alt=""></button>
+                    <div class="dropdown-content">
+                        <a @click="openModal()" href="#">Войти</a>
                     </div>
                 </div>
             </div>
@@ -72,6 +95,7 @@ export default {
     cursor: pointer;
     background-color: #131217;
     width: 25px;
+    height: 42px;
 }
 
 .dropdown {
@@ -88,6 +112,17 @@ export default {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     right: 0;
+    top: 40px;
+}
+
+.nickname {
+    text-align: center;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif
 }
 
 .dropdown-content a {

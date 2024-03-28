@@ -5,7 +5,7 @@ class userController {
         const {nickname, email, password} = req.body
         try {
             const newUser = await User.create({nickname, email, password})
-            res.json(newUser)
+            res.status(200).json(newUser)
         } catch (error) {
             res.status(400).json({error: error.message})
         }
@@ -41,8 +41,7 @@ class userController {
         }
     }
     async getUserAndCheckPassword(req, res) {
-        const email = req.body.email;
-        const password = req.body.password;
+        const {email, password} = req.body;
         try {
             const users = await User.findAll({
                 where: {
@@ -54,9 +53,12 @@ class userController {
                 if(user.password == password) {
                     const response = {
                         message: "Успешный вход",
+                        isLoggedIn: 'true',
                         user: {
                             nickname: user.nickname,
-                        email: user.email
+                            email: user.email,
+                            balance: user.balance,
+                            user_id: user.user_id
                         }
                     }
                     res.json(response);

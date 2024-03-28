@@ -6,7 +6,8 @@ export default {
     data() {
         return {
             productArray: [],
-            category: this.store.option
+            category: this.store.option,
+            product_id: null
         }
     },
     methods: {
@@ -17,6 +18,7 @@ export default {
                     const category = this.store.option;
                     const res = await axios.get(`http://localhost:5001/api/game/${id}/${category}`).then((res) => {
                         this.productArray = res.data
+                        console.log(res.data)
                     })
                 } catch (e) {
                     console.log(e);
@@ -27,9 +29,31 @@ export default {
                     const id = this.$route.params.id;
                     const res = await axios.get(`http://localhost:5001/api/products/${id}`).then((res) => {
                         this.productArray = res.data
+                        console.log(res.data)
                     })
                 } catch (e) {
                     console.log(e);
+                }
+            }
+        },
+        async addToCart(id) {
+            const user_id = this.store.user_id
+            const product_id = id
+            console.log(user_id, product_id)
+            if (user_id == null) {
+                console.log('Пользователь не авторизован')
+            }
+            else {
+                try {
+                    const res = await axios.post(`http://localhost:5001/api/user/cart/add`, {
+                    user_id: user_id,
+                    product_id: product_id
+                    }).then(res => {
+                    console.log(res.data)
+                    })
+                }
+                catch (error){
+                    console.log(error)
                 }
             }
         },
@@ -62,7 +86,7 @@ export default {
                     <span>{{ product.product_cost }} ₽</span>
                 </div>
                 <div class="product-cart">
-                    <a href="#"><img class="cart-img" src="../assets/game-products/addtocart/addToCart.svg" alt=""></a>
+                    <a href="#" @click="addToCart(product.product_id)"><img class="cart-img" src="../assets/game-products/addtocart/addToCart.svg" alt=""></a>
                 </div>
             </div>
             <div class="product-description">
@@ -96,8 +120,8 @@ export default {
     align-items: center;
     padding: 100px 0px;
     width: 100%;
-    height: 100%;
     font-size: 30px;
+    color: white;
 }
 
 .cont-cost-cart {
