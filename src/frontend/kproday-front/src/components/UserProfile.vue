@@ -1,9 +1,9 @@
 <script>
-import {useStore} from '../folders/Store'
+import { useStore } from '../folders/Store'
 import axios from 'axios'
 
 export default {
-    data(){
+    data() {
         return {
             oldPassword: "",
             newPassword: "",
@@ -12,7 +12,7 @@ export default {
     },
     setup() {
         const store = useStore()
-        return {store}
+        return { store }
     },
     mounted() {
         this.store.nickname = localStorage.getItem("nickname")
@@ -23,14 +23,14 @@ export default {
         async updatePasswordUser() {
             try {
                 const res = await axios.post('http://localhost:5001/api/user/update-password', {
-                email: this.store.email,
-                oldPassword: this.oldPassword,
-                newPassword: this.newPassword
-            })
-            this.message = res.data.message
-            console.log(res.data.message)
+                    email: this.store.email,
+                    oldPassword: this.oldPassword,
+                    newPassword: this.newPassword
+                })
+                this.message = res.data.message
+                console.log(res.data.message)
             }
-            catch (error){
+            catch (error) {
                 console.log(error)
                 this.message = "Ошибка при обновлении пароля"
             }
@@ -60,7 +60,7 @@ export default {
             <div class="cont-profile">
                 <div class="profile-header">
                     <img class="profile-header-img" src="" alt="">
-                    <p>{{this.store.nickname}}</p>
+                    <p>{{ this.store.nickname }}</p>
                 </div>
                 <div class="profile-settings">
                     <div class="profile-info">
@@ -86,7 +86,7 @@ export default {
                             <p>Новый пароль</p>
                             <input v-model="newPassword" type="text" placeholder="Введите новый пароль">
                         </div>
-                        <p class="error-mes" v-if="this.message">{{message}}</p>
+                        <p class="error-mes" v-if="this.message">{{ message }}</p>
                         <div class="cont-button">
                             <button @click.prevent="updatePasswordUser()" class="password-button">Изменить пароль</button>
                         </div>
@@ -94,26 +94,26 @@ export default {
                 </div>
                 <p class="p">История покупок</p>
                 <div class="cont-history">
-                        <div class="history">
-                            <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
-                            <p class="history-cost">1050p</p>
-                            <p class="history-description">Аккаунт кс 2 с праймом</p>
-                        </div>
-                        <div class="history">
-                            <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
-                            <p class="history-cost">1050p</p>
-                            <p class="history-description">Аккаунт кс 2 с праймом</p>
-                        </div>
-                        <div class="history">
-                            <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
-                            <p class="history-cost">1050p</p>
-                            <p class="history-description">Аккаунт кс 2 с праймом</p>
-                        </div>
-                        <div class="history">
-                            <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
-                            <p class="history-cost">1050p</p>
-                            <p class="history-description">Аккаунт кс 2 с праймом</p>
-                        </div>
+                    <div class="history">
+                        <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
+                        <p class="history-cost">1050p</p>
+                        <p class="history-description">Аккаунт кс 2 с праймом</p>
+                    </div>
+                    <div class="history">
+                        <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
+                        <p class="history-cost">1050p</p>
+                        <p class="history-description">Аккаунт кс 2 с праймом</p>
+                    </div>
+                    <div class="history">
+                        <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
+                        <p class="history-cost">1050p</p>
+                        <p class="history-description">Аккаунт кс 2 с праймом</p>
+                    </div>
+                    <div class="history">
+                        <img src="../assets/game-products/cs2products/cs2account1.svg" alt="">
+                        <p class="history-cost">1050p</p>
+                        <p class="history-description">Аккаунт кс 2 с праймом</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,6 +135,7 @@ export default {
 
 main {
     display: flex;
+    height: 100vh;
 }
 
 .cont-user-main {
@@ -142,7 +143,6 @@ main {
     flex-direction: column;
     border-right: 2px solid #17171a;
     padding: 50px 60px;
-    height: 100%;
     width: 200px;
     justify-content: space-between;
 }
@@ -156,7 +156,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    height: 100%;
+
 }
 
 .nav-cont-a {
@@ -328,8 +328,8 @@ main {
 }
 
 .history {
-    width:200px;
-    
+    width: 200px;
+
 }
 
 .history img {

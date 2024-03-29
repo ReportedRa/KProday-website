@@ -4,7 +4,7 @@ import axios from 'axios'
 export default {
     setup() {
         const store = useStore()
-        return {store}
+        return { store }
     },
     data() {
         return {
@@ -27,11 +27,11 @@ export default {
     },
     mounted() {
         const logged = localStorage.getItem("isLogged");
-            if (logged == true) {
-                this.store.isLoggedIn = logged;
-                this.store.nickname = localStorage.getItem("nickname");
-                this.store.email = localStorage.getItem("email");  
-            }
+        if (logged == true) {
+            this.store.isLoggedIn = logged;
+            this.store.nickname = localStorage.getItem("nickname");
+            this.store.email = localStorage.getItem("email");
+        }
     },
     methods: {
         closeModal() {
@@ -42,49 +42,52 @@ export default {
         },
         async createUser() {
             if (this.checkPassword) {
-                return 
+                return
             }
             try {
-                const { nickname, email, passwordRegister } = this;
-                const response = await axios.post('http://localhost:5001/api/user', { nickname, email, passwordRegister });
+                const response = await axios.post('http://localhost:5001/api/user', {
+                    nickname: this.nickname,
+                    email: this.email,
+                    password: this.passwordRegister
+                });
                 console.log(response.data);
             } catch (error) {
                 console.error(error);
-      }
+            }
 
         },
         async login() {
-          try {
-            const res = await axios.post('http://localhost:5001/api/login', {
-              email: this.email,
-              password: this.password
-            }).then((res) => {
-                if (res.data.isLoggedIn) {
-                    this.store.isLoggedIn = res.data.isLoggedIn
-                    this.message = res.data.message
-                    this.store.nickname = res.data.user.nickname
-                    localStorage.setItem("isLogged", res.data.isLoggedIn)
-                    localStorage.setItem("nickname", res.data.user.nickname)
-                    localStorage.setItem("email", res.data.user.email)
-                    localStorage.setItem("balance", res.data.user.balance)
-                    localStorage.setItem("user_id", res.data.user.user_id)
-                    console.log(res.data)
-                    alert(res.data.message)
-                    this.closeModal()
-                    this.email=""
-                    this.password=""
+            try {
+                const res = await axios.post('http://localhost:5001/api/login', {
+                    email: this.email,
+                    password: this.password
+                }).then((res) => {
+                    if (res.data.isLoggedIn) {
+                        this.store.isLoggedIn = res.data.isLoggedIn
+                        this.message = res.data.message
+                        this.store.nickname = res.data.user.nickname
+                        localStorage.setItem("isLogged", res.data.isLoggedIn)
+                        localStorage.setItem("nickname", res.data.user.nickname)
+                        localStorage.setItem("email", res.data.user.email)
+                        localStorage.setItem("balance", res.data.user.balance)
+                        localStorage.setItem("user_id", res.data.user.user_id)
+                        console.log(res.data)
+                        alert(res.data.message)
+                        this.closeModal()
+                        this.email = ""
+                        this.password = ""
+                    } else {
+                        this.errorMessage = res.data.error
+                    }
+                })
+            } catch (error) {
+                if (error.res) {
+                    this.errorMessage = error.res.data.error
                 } else {
-                    this.errorMessage = res.data.error
-           }
-            })
-          } catch (error) {
-            if (error.res) {
-              this.errorMessage = error.res.data.error
-           } else {
-              console.error(error);
+                    console.error(error);
+                }
             }
-      }
-    }
+        }
     }
 }
 </script>
@@ -136,14 +139,13 @@ export default {
 </template>
 
 <style>
-
-.modal-main{
+.modal-main {
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    overflow: auto;  
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -211,6 +213,7 @@ export default {
     gap: 10px;
     padding: 10px;
 }
+
 .modal-input input {
     background: #383543;
     border-radius: 9px;

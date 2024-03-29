@@ -21,8 +21,7 @@ export default {
 </script>
 
 <template>
-  <site-main></site-main>
-  <!-- <router-view></router-view> -->
+  <router-view></router-view>
 </template>
 
 <style></style>
